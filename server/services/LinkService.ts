@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { resolve, dirname, join } from "node:path";
 import { createHash } from "node:crypto";
-import yaml from "js-yaml";
+import { load } from "js-yaml";
 import { applicationEnv } from "~~/Env";
 import { useServerLogger } from "~~/server/plugins/00_logging";
 import {
@@ -52,7 +52,7 @@ export class LinkService {
     }
 
     try {
-      const raw = yaml.load(readFileSync(configPath, "utf8"));
+      const raw = load(readFileSync(configPath, "utf8"));
       const parsed = LinksConfigSchema.parse(raw ?? {});
       return parsed.links;
     } catch (error) {

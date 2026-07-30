@@ -4,7 +4,6 @@ export interface Link {
   url: string;
   description?: string;
   icon?: string;
-  /** URL to fetch the link's image from, e.g. "/api/links/images/wiki.png" */
   imageUrl?: string;
   category?: string;
   adminOnly: boolean;
