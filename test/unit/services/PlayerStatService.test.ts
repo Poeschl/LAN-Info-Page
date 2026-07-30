@@ -25,7 +25,7 @@ describe("PlayerStatService", () => {
     ).mockReturnValue({
       findOne,
       save,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       createQueryBuilder: vi.fn(() => {
         const builder = {
           where: vi.fn(() => builder),
