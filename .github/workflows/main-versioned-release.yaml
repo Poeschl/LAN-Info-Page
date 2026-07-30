@@ -149,7 +149,7 @@ jobs:
 
       - name: ⚙️ Build Image
         id: build-image
-        uses: redhat-actions/buildah-build@v2
+        uses: redhat-actions/buildah-build@v3
         with:
           containerfiles: docker/Dockerfile
           context: .
