@@ -1,0 +1,123 @@
+@use "custom-variables";
+@use "sass:color";
+
+@use "bulma/sass/utilities" with (
+  $primary: custom-variables.$primary,
+  $link: color.adjust(custom-variables.$primary, $lightness: 20%),
+  $info: color.adjust(custom-variables.$cyan, $lightness: 20%),
+  $black: custom-variables.$black,
+  $black-bis: custom-variables.$black-bis,
+  $black-ter: custom-variables.$black-ter,
+
+  $grey-darker: custom-variables.$grey-darker,
+  $grey-dark: custom-variables.$grey-dark,
+  $grey: custom-variables.$grey,
+  $grey-light: custom-variables.$grey-lighter,
+  $grey-lighter: custom-variables.$grey-lighter,
+  $grey-lightest: custom-variables.$grey-lightest,
+
+  $white-ter: custom-variables.$white-ter,
+  $white-bis: custom-variables.$white-bis,
+  $white: custom-variables.$white,
+
+  $cyan: custom-variables.$cyan,
+  $red: custom-variables.$red,
+  $green: custom-variables.$green,
+);
+
+@use "bulma/sass/elements/box" with (
+  $box-background-color: color.adjust(utilities.$black-ter, $lightness: 5%),
+  $box-shadow: none,
+  $box-color: utilities.$grey-lightest
+);
+
+@use "bulma/sass/base" with (
+  $body-background-color: color.adjust(utilities.$black, $lightness: 5%),
+  $body-overflow-x: auto,
+  $body-overflow-y: auto
+);
+
+@use "bulma/sass/elements/progress" with (
+  $progress-bar-background-color: utilities.$black-bis
+);
+
+@use "bulma/sass/components/navbar" with (
+  $navbar-burger-color: custom-variables.$grey-lightest
+);
+
+@use "bulma/sass/components/card" with (
+  $card-background-color: color.adjust(utilities.$black-ter, $lightness: 5%),
+  $card-shadow: none,
+  $card-color: utilities.$grey-lightest
+);
+
+@use "bulma/sass/layout/footer" with (
+  $footer-background-color: unset,
+);
+
+@use "bulma/sass/layout/section" with (
+  $section-padding: 2rem 1.5rem,
+  $section-padding-desktop: 2rem 3rem,
+  $section-padding-medium: 6rem 4.5rem,
+  $section-padding-large: 12rem 6rem
+);
+
+// All bulma modules which are used without a modification
+@forward "bulma/sass/components/card";
+@forward "bulma/sass/components/modal";
+@forward "bulma/sass/elements/button";
+@forward "bulma/sass/elements/icon";
+@forward "bulma/sass/elements/title";
+@forward "bulma/sass/elements/image";
+@forward "bulma/sass/elements/delete";
+@forward "bulma/sass/elements/content";
+@forward "bulma/sass/elements/notification";
+@forward "bulma/sass/form";
+@forward "bulma/sass/grid/grid";
+@forward "bulma/sass/grid/columns";
+@forward "bulma/sass/helpers/color";
+@forward "bulma/sass/helpers/flexbox";
+@forward "bulma/sass/helpers/spacing";
+@forward "bulma/sass/helpers/typography";
+@forward "bulma/sass/helpers/visibility";
+@forward "bulma/sass/layout/container";
+@forward "bulma/sass/layout/level";
+
+@forward "bulma/sass/themes";
+
+@use "bulma/sass/utilities/mixins" as mx;
+
+.container.is-touch-padded  {
+
+  @include mx.touch{
+    padding-left: utilities.$gap;
+    padding-right: utilities.$gap;
+  }
+
+  @include mx.desktop{
+    padding-left: unset;
+    padding-right: unset;
+  }
+}
+
+.modal-card {
+  --bulma-shadow: none;
+  --bulma-modal-card-head-background-color: var(--bulma-modal-card-foot-background-color);
+  --bulma-modal-card-head-padding: 1.25rem;
+}
+
+.card-image:first-child .placeholder {
+  border-start-start-radius: var(--bulma-card-radius);
+  border-start-end-radius: var(--bulma-card-radius);
+}
+
+// Default transitions
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}

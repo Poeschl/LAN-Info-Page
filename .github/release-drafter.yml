@@ -1,0 +1,55 @@
+# Don't rename this file to .yaml, as the release-drafter action expects yml extension
+---
+name-template: "$RESOLVED_VERSION"
+tag-template: "$RESOLVED_VERSION"
+change-template: "- $TITLE @$AUTHOR ([#$NUMBER]($URL))"
+category-template: "### $TITLE"
+sort-direction: ascending
+
+categories:
+  - title: "🚨 Breaking changes"
+    labels:
+      - "breaking-change"
+  - title: "✨ New features"
+    labels:
+      - "new-feature"
+  - title: "🐛 Bug fixes"
+    labels:
+      - "bugfix"
+  - title: "🚀 Enhancements"
+    labels:
+      - "enhancement"
+      - "refactor"
+  - title: "🔨 Maintenance"
+    labels:
+      - "maintenance"
+  - title: "📚 Documentation"
+    labels:
+      - "documentation"
+  - title: "⬆️ Dependency updates"
+    labels:
+      - "dependencies"
+
+version-resolver:
+  major:
+    labels:
+      - "major-release"
+      - "breaking-change"
+  minor:
+    labels:
+      - "minor-release"
+      - "new-feature"
+  patch:
+    labels:
+      - "bugfix"
+      - "dependencies"
+      - "documentation"
+      - "enhancement"
+      - "refactor"
+      - "maintenance"
+  default: patch
+
+template: |
+  ## Changes in this version
+
+  $CHANGES

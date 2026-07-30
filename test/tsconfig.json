@@ -1,0 +1,31 @@
+{
+  "extends": "../.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["../app/*"],
+      "~": ["../app"],
+      "~~/*": ["../*"],
+      "~~": [".."],
+      "@/*": ["../app/*"],
+      "@": ["../app"],
+      "@@/*": ["../*"],
+      "@@": [".."],
+      "#shared/*": ["../shared/*"],
+      "#shared": ["../shared"],
+      "#imports": ["../.nuxt/imports"],
+      "#components": ["../.nuxt/components"]
+    },
+    "types": ["vitest/globals", "@nuxt/test-utils"]
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.vue",
+    "../app/**/*.ts",
+    "../app/**/*.vue",
+    "../server/**/*.ts",
+    "../shared/**/*.ts",
+    "../.nuxt/imports.d.ts",
+    "../.nuxt/components.d.ts"
+  ]
+}

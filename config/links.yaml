@@ -1,0 +1,52 @@
+# Configuration for the links shown on the LAN-Page start page.
+#
+# Each entry supports the following fields:
+#   title        - required, display name of the link
+#   url          - required, target URL
+#   description  - optional, short description shown below the title
+#   icon         - optional, FontAwesome icon (e.g. "fa-solid fa-gamepad"), used as a fallback if no image is set
+#   image        - optional, filename of an image located in the "images" folder next to this file
+#                  (e.g. "config/images/wiki.png"), served at /api/links/images/<filename>
+#   category     - optional, used to group links into sections on the page
+#   adminOnly    - optional (default: false), only shown to users with the admin role
+#
+# This file is read at runtime, so changes are picked up without rebuilding the app.
+links:
+  - title: LAN Party Wiki
+    url: https://example.com/wiki
+    description: Rules, schedule and general information about the event
+    icon: fa-solid fa-book
+    # image: wiki.png
+    category: General
+
+  - title: Game Server Browser
+    url: https://example.com/servers
+    description: Overview of all currently running game servers
+    icon: fa-solid fa-server
+    category: Games
+
+  - title: Voice Chat
+    url: https://example.com/voice
+    description: Join the shared voice chat for the event
+    icon: fa-solid fa-headset
+    category: General
+
+  - title: Tournament Bracket
+    url: https://example.com/tournament
+    description: Live bracket for the ongoing tournament
+    icon: fa-solid fa-trophy
+    category: Games
+
+  - title: Admin Dashboard
+    url: https://example.com/admin
+    description: Manage the event infrastructure
+    icon: fa-solid fa-screwdriver-wrench
+    category: Admin
+    adminOnly: true
+
+  - title: Network Monitoring
+    url: https://example.com/monitoring
+    description: Live status of switches, APs and servers
+    icon: fa-solid fa-chart-line
+    category: Admin
+    adminOnly: true

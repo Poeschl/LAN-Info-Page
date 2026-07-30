@@ -1,0 +1,43 @@
+# The config for the local pre-commit steps
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=1024, --enforce-all]
+      - id: check-shebang-scripts-are-executable
+      - id: mixed-line-ending
+        args: [--fix, lf]
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.3.8
+    hooks:
+      - id: biome-format
+        types_or: [css, scss, javascript, vue, ts, yaml, html, json]
+        additional_dependencies: ["@biomejs/biome@2.3.8"]
+  - repo: https://github.com/shssoichiro/oxipng
+    rev: v9.1.4
+    hooks:
+      - id: oxipng
+        args: ["-o", "4", "--strip", "safe", "--alpha"]
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.24.2
+    hooks:
+      - id: gitleaks
+  - repo: local
+    hooks:
+      - id: yaml-extension-check
+        name: yaml extension check
+        description: Checks if all yaml files have the extension '.yaml'
+        entry: All Yaml files should have the *.yaml extension.
+        language: fail
+        files: .*\.(yml)
+        exclude: ^\.github/release-drafter\.ya?ml$
+      - id: jpeg-extension-check
+        name: jpeg extension check
+        description: Checks if all jpeg files have the extension '.jpeg'
+        entry: All JPEG files should have the *.jpeg extension.
+        language: fail
+        files: .*\.(jpg)

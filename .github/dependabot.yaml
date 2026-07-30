@@ -1,0 +1,40 @@
+version: 2
+updates:
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "⬆️"
+    groups:
+      nuxt:
+        patterns:
+          - "nuxt*"
+          - "@nuxt/*"
+          - "vue*"
+      drizzle:
+        patterns:
+          - "drizzle-*"
+      linters:
+        patterns:
+          - "eslint*"
+          - "@eslint/*"
+          - "@biomejs/*"
+      types:
+        patterns:
+          - "@types/*"
+
+  - package-ecosystem: "docker"
+    directory: "/docker"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "⬆️"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "⬆️"
