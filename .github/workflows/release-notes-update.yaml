@@ -1,0 +1,20 @@
+name: Prepare Release Notes
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update_release_draft:
+    name: ✏️ Draft release notes
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      # write permission is required for autolabeler
+      # otherwise, read permission is required at least
+      pull-requests: read
+    steps:
+      - name: 🚀 Run Release Drafter
+        uses: release-drafter/release-drafter@v7.1.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

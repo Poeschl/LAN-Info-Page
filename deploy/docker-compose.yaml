@@ -1,0 +1,47 @@
+services:
+
+  lan-page:
+    image: ghcr.io/lan-page/lan-page:latest
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    environment:
+      DATABASE_HOST: database
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: postgres
+
+      # Required: session encryption key (must be with at least 32 characters)
+      NUXT_SESSION_PASSWORD: "changeme-replace-with-a-secure-random-string-32chars"
+
+      # Enable OIDC authentication by setting those variables (required, no other login method exists)
+      OIDC_DISCOVERY_URL: "https://your-idp.example.com/.well-known/openid-configuration"
+      OIDC_CLIENT_ID: changeme
+      OIDC_CLIENT_SECRET: changeme
+    depends_on:
+      database:
+        condition: service_healthy
+    volumes:
+      # Mount your own links configuration to override the shipped default
+      - ./links.yaml:/app/config/links.yaml:ro
+      # Mount your own link images, referenced via the "image" field in links.yaml
+      - ./images:/app/config/images:ro
+      # Persists the generated session password across container restarts
+      - lan-page-data:/app/data
+
+  database:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: "pg_isready -U postgres"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+
+volumes:
+  db-data:
+  lan-page-data:

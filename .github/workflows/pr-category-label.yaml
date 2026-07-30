@@ -1,0 +1,28 @@
+name: Check for PR category label
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - labeled
+      - unlabeled
+      - synchronize
+
+jobs:
+  pr_labels:
+    name: Verify PR category label
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: 🏷️ Enforce category label
+        uses: jesusvasquez333/verify-pr-label-action@v1.4.0
+        with:
+          pull-request-number: "${{ github.event.pull_request.number }}"
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          valid-labels: >-
+            breaking-change, bugfix, documentation, enhancement, refactor,
+            new-feature, maintenance, dependencies
+          # Only use the job status to indicate if the PR is valid or not
+          disable-reviews: true

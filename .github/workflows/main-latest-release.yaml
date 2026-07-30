@@ -1,0 +1,124 @@
+name: Publish latest dev release
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  tests:
+    name: Execute all tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: ↩️ Checkout
+        uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      - name: 🏗️ Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: 🏗️ Install packages
+        run: npm ci
+
+      - name: 🏗️ Prepare environment file
+        run: cp Env.template Env.ts
+
+
+      - name: ✅ Execute tests
+        run: npm run test
+
+  build:
+    name: Build Nuxt
+    runs-on: ubuntu-latest
+    needs:
+      - tests
+    steps:
+      - name: ↩️ Checkout
+        uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      - name: 🏗️ Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: 🏗️ Install packages
+        run: npm ci
+
+      - name: 🏗️ Prepare environment file
+        run: cp Env.template Env.ts
+
+      - name: ⚙️ Build application
+        run: npm run build
+
+      - name: 🗄️ Upload Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: nuxt
+          path: .output
+          retention-days: 1
+          include-hidden-files: true
+
+  image:
+    name: Build container image
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: ↩️ Checkout
+        uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      - name: 🗄️ Download artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: nuxt
+          path: .output
+
+      - name: ℹ️ Generate OCI meta info
+        id: docker-meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ghcr.io/lan-page/lan-page
+          tags: latest
+
+      - name: 🏗️ Install qemu dependency
+        uses: docker/setup-qemu-action@v4
+
+      - name: ⚙️ Build Image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          containerfiles: docker/Dockerfile
+          context: .
+          tags: ${{ steps.docker-meta.outputs.tags }}
+          labels: ${{ steps.docker-meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
+          # Disable layer caching
+          layers: false
+
+      - name: 🔑 GHCR Login
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🚀 Push images
+        id: push-image
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}

@@ -1,0 +1,4 @@
+*
+!docker
+!.output
+.output/**/node_modules/**

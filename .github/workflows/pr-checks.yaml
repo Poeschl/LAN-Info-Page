@@ -1,0 +1,120 @@
+name: PR Checks
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - main
+
+jobs:
+  pre-commit:
+    name: Check repository with pre-commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: ↩️ Checkout
+        uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      - name: 🏗️ Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+
+      - name: 🔍️ Execute pre-commit on all files
+        uses: pre-commit/action@v3.0.1
+
+  tests:
+    name: Execute all tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: ↩️ Checkout
+        uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      - name: 🏗️ Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: 🏗️ Install packages
+        run: npm ci
+
+      - name: 🏗️ Prepare environment file
+        run: cp Env.template Env.ts
+
+
+      - name: ✅ Execute tests
+        run: npm run test
+
+  image-build:
+    name: Check image building
+    runs-on: ubuntu-latest
+    steps:
+      - name: ↩️ Checkout
+        uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      - name: 🏗️ Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: 🏗️ Install packages
+        run: npm ci
+
+      - name: 🏗️ Prepare environment file
+        run: cp Env.template Env.ts
+
+      - name: ⚙️ Build application
+        run: npm run build
+
+      - name: ℹ️ Generate OCI meta info
+        id: docker-meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ghcr.io/lan-page/lan-page
+          tags: latest
+
+      - name: 🏗️ Install qemu dependency
+        uses: docker/setup-qemu-action@v4
+
+      - name: ⚙️ Build Image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          containerfiles: docker/Dockerfile
+          context: .
+          tags: ${{ steps.docker-meta.outputs.tags }}
+          labels: ${{ steps.docker-meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
+          # Disable layer caching
+          layers: false
+
+      # Required for dive action, since it has the schema hardcoded
+      - name: 🚚 Push image to docker daemon
+        run: podman push ${{ steps.build-image.outputs.image-with-tag }} docker-daemon:${{ steps.build-image.outputs.image-with-tag }}
+
+      - name: 🚀 Execute dive
+        uses: MaxymVlasov/dive-action@v1.6.0
+        with:
+          image: "${{ steps.build-image.outputs.image-with-tag }}"
+          config-file: ${{ github.workspace }}/.dive-ci.yaml
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  forbid-merge-commits:
+    name: Check for merge commits in PR branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔍️ Ensure semi-linear git history
+        uses: motlin/forbid-merge-commits-action@v1.0.7
+        with:
+          fail-on-merge-commits: 'true'
