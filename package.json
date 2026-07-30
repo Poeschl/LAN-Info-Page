@@ -44,7 +44,7 @@
     "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "@nuxt/test-utils": "^4.0.0",
     "@types/js-yaml": "^4.0.9",
-    "@types/node": "^25.5.0",
+    "@types/node": "^26.1.2",
     "@types/pg": "^8.18.0",
     "@vue/test-utils": "^2.4.6",
     "cpy-cli": "^7.0.0",
