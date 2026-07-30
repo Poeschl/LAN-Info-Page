@@ -1,4 +1,4 @@
-FROM node:25-alpine
+FROM node:26-alpine
 WORKDIR /app
 
 COPY --chmod=110 docker/entrypoint.sh /entrypoint.sh
