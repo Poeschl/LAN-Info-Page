@@ -32,4 +32,9 @@ beforeAll(() => {
   registerEndpoint("/api/stats", () => ({
     stats: [],
   }));
+
+  // Mock /api/downloads endpoint to prevent API calls during tests
+  registerEndpoint("/api/downloads", () => ({
+    files: [],
+  }));
 });

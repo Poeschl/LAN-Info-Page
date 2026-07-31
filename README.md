@@ -16,6 +16,7 @@ table below the link list.
 - The page is publicly visible; login is only required to unlock admin-only links
 - Authentication via OpenID Connect (OIDC) only
 - LAN party participant stats, with an online/offline status dot and "last online at" hover tooltip per participant (powered by ETI LAN Launcher)
+- Downloadable files for participants (mods, installers, documents, ...), listed below the link collection
 
 Below subsections will describe the main features in more detail.
 
@@ -27,6 +28,27 @@ All links are configured in a file named `links.yaml`. Each link has a title, UR
 By a simple configuration change, the page can be adapted to any LAN party's needs.
 For links that are only relevant to admins, the `adminOnly` field can be set to `true`.
 Those links will only be shown to logged-in users with the configured admin role.
+
+### Downloads
+
+Any file placed in the `config/downloads` folder is automatically listed in a "Downloads" section on the page,
+right below the link collection. There is no configuration file for this feature - just drop a file in and it
+shows up; remove it and it disappears again, no restart required. This is useful for sharing installers, mods or
+maps directly from the page instead of (or in addition to) linking to an external file share.
+
+Only installers and archives are allowed: `.exe`, `.msi`, `.zip`, `.7z`, `.rar`, `.tar`, `.tar.gz`, `.tgz`,
+`.tar.bz2` and `.gz`. Files with any other extension are silently ignored - both in the listing and when
+requested directly - to keep this feature limited to its intended purpose (shipping tools/mods to participants,
+not general-purpose file hosting).
+
+Files are served at `/api/downloads/<filename>` with a "Save As" download prompt, and are publicly accessible to
+anyone visiting the page (same as the regular link collection) - there is currently no admin-only restriction for
+downloadable files. Hidden files (names starting with a dot) and subfolders are ignored. Installers and archives
+are shown with distinct icons in the "Downloads" section so participants can tell them apart at a glance.
+
+If you need more advanced file sharing (uploads by participants, folder browsing, permissions, ...), consider
+running a dedicated file server like [copyparty](https://github.com/9001/copyparty) alongside this page and adding
+a regular link to it instead.
 
 ### LAN Participants Statistics
 
@@ -73,6 +95,7 @@ The settings below are suitable for a local environment provided by the docker-c
   "databasePassword": "postgres",
   "databaseName": "postgres",
   "linksConfigPath": "./config/links.yaml",
+  "downloadsPath": "./config/downloads",
   "statsOnlineThresholdMinutes": 15,
   "statsExpireHours": 24,
   "logLevel": "info",
@@ -88,6 +111,7 @@ page still works, but nobody can log in and admin-only links stay hidden.
 
 Adjust `config/links.yaml` to change the links shown on the page. See the comments in that file for the supported fields.
 Optionally add images to `config/images/` and reference their filename via a link's `image` field; they are served at `/api/links/images/<filename>`.
+Optionally add files to `config/downloads/` to offer them for download to participants; see the "Downloads" section above.
 
 ### Ensure Code quality with pre-commit
 

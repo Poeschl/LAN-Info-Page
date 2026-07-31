@@ -12,6 +12,7 @@ export const applicationEnv = {
   databasePassword: "test",
   databaseName: "test",
   linksConfigPath: "./config/links.yaml",
+  downloadsPath: "./config/downloads",
   statsOnlineThresholdMinutes: 15,
   statsExpireHours: 24,
   logLevel: "info",

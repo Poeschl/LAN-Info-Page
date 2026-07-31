@@ -5,6 +5,10 @@ import {
   faBook,
   faChartLine,
   faCircleNotch,
+  faFile,
+  faFileArrowDown,
+  faFileZipper,
+  faGear,
   faHeadset,
   faHome,
   faScrewdriverWrench,
@@ -32,6 +36,10 @@ library.add(faHeadset);
 library.add(faScrewdriverWrench);
 library.add(faServer);
 library.add(faTrophy);
+library.add(faFileArrowDown);
+library.add(faFileZipper);
+library.add(faGear);
+library.add(faFile);
 
 // noinspection JSUnusedGlobalSymbols
 export default defineNuxtPlugin((nuxtApp) => {
