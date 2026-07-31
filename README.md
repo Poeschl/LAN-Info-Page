@@ -28,6 +28,11 @@ information.
 
 ## Development
 
+### AI usage
+
+AI is used in this project to support development. Pure 100% agentic development is not done and is not planned.
+All code changes go through human code review to ensure quality and correctness.
+
 ### Environment Setup
 
 For local development, install python3, pip, npm and Node.js (version 24 or later).
