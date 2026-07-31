@@ -19,8 +19,7 @@ vi.mock("#auth-utils", () => ({
 beforeAll(() => {
   // Mock /api/auth endpoint to prevent fetch errors
   registerEndpoint("/api/auth", () => ({
-    user: { username: "test" },
-    loggedIn: true,
+    method: "oauth2",
   }));
 
   // Mock /api/links endpoint to prevent API calls during tests

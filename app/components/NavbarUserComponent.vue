@@ -21,6 +21,6 @@ const loggedIn = computed(() => userSession.loggedIn.value);
 
 const logout = async () => {
   await userSession.clear();
-  navigateTo("/login");
+  navigateTo("/");
 };
 </script>

@@ -16,7 +16,14 @@
 
       <div id="menuItems" class="navbar-menu" :class="{ 'is-active': mobileNavOpen }">
         <div class="navbar-end">
-          <a class="navbar-item" :href="authApi.oidcUrl" v-if="!loggedIn">
+          <a
+            class="navbar-item"
+            :class="{ 'is-login-disabled': isLoginDisabled }"
+            :href="isLoginDisabled ? undefined : authApi.oidcUrl"
+            :aria-disabled="isLoginDisabled"
+            :tabindex="isLoginDisabled ? -1 : undefined"
+            v-if="!loggedIn"
+          >
             <div class="icon-text">
               <div class="icon">
                 <FontAwesomeIcon icon="fa-regular fa-user"/>
@@ -36,14 +43,28 @@ import { ref } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useUserSession } from "#imports";
 import { useAuthApi } from "~/composeables/useAuthApi";
+import { AuthMethod } from "#shared/models/Auth";
 
 const mobileNavOpen = ref<boolean>(false);
 const loggedIn = computed(() => useUserSession().loggedIn.value);
 const authApi = useAuthApi();
+const { data: loginInfo } = await useAsyncData(
+  "auth-info",
+  authApi.getLoginInfo,
+);
+const isLoginDisabled = computed(
+  () => loginInfo.value?.method !== AuthMethod.OIDC,
+);
 
 const toggleMobileNav = () => {
   mobileNavOpen.value = !mobileNavOpen.value;
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.is-login-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+</style>
