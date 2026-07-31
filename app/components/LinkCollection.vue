@@ -33,7 +33,7 @@
                   <span class="has-text-weight-semibold">{{ link.title }}</span>
                   <span v-if="link.adminOnly" class="tag is-warning is-light ml-2">Admin</span>
                 </div>
-                <p v-if="link.description" class="is-size-7 has-text-grey">
+                <p v-if="link.description" class="is-size-7 has-text-grey description-ellipsis" :title="link.description">
                   {{ link.description }}
                 </p>
               </div>
@@ -59,7 +59,7 @@ const categories = computed<string[]>(() => {
   for (const link of props.links) {
     seen.add(link.category?.trim() || "General");
   }
-  return Array.from(seen);
+  return Array.from(seen).sort((a, b) => a.localeCompare(b));
 });
 
 const linksByCategory = computed<Record<string, Link[]>>(() => {
@@ -82,6 +82,12 @@ const linksByCategory = computed<Record<string, Link[]>>(() => {
   &:hover {
     transform: translateY(-2px);
   }
+}
+
+.description-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .link-image {

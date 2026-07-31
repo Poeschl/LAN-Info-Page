@@ -55,9 +55,9 @@ intermediate login page). Unlike the admin-only login of the previous project, *
 log in here since the page itself is public. Only users whose token contains the admin role additionally see the
 admin-only links.
 
-* `OIDC_DISCOVERY_URL` (optional): The OpenID Connect discovery URL for OIDC authentication. (for example for keycloak, `https://login.example.com/realms/myrealm/.well-known/openid-configuration`)
-* `OIDC_CLIENT_ID` (optional): The OpenID Connect client ID.
-* `OIDC_CLIENT_SECRET` (optional): The OpenID Connect client secret.
+* `NUXT_OAUTH_OIDC_DISCOVERY_URL` (optional): The OpenID Connect discovery URL for OIDC authentication. (for example for keycloak, `https://login.example.com/realms/myrealm/.well-known/openid-configuration`)
+* `NUXT_OAUTH_OIDC_CLIENT_ID` (optional): The OpenID Connect client ID.
+* `NUXT_OAUTH_OIDC_CLIENT_SECRET` (optional): The OpenID Connect client secret.
 
 As redirect URI use `https://<your-domain>/auth/oidc` and a user needs to have the scope `openid` and `email` to log in.
 
