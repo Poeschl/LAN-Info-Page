@@ -1,5 +1,5 @@
 <template>
-  <div v-if="stats.length > 0" class="mb-5">
+  <div class="mb-5">
     <h2 class="title is-4">
 Participants Stats
 </h2>

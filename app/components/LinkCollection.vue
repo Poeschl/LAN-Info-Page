@@ -1,4 +1,7 @@
 <template>
+  <h2 class="title is-4">
+    Link Collection
+  </h2>
   <div>
     <div v-if="links.length === 0" class="has-text-centered py-6">
       No links configured yet.
@@ -23,7 +26,7 @@
                   class="link-image mr-3"
               >
               <span class="icon is-medium mr-3" v-else-if="link.icon">
-                <FontAwesomeIcon :icon="link.icon"/>
+                <FontAwesomeIcon :icon="link.icon" class="fa-xl"/>
               </span>
               <div>
                 <div class="is-flex is-align-items-center">
