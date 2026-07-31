@@ -45,7 +45,7 @@ colored dot indicating online/offline status.
 * `LINKS_CONFIG_PATH` (optional): Path to the links YAML file, relative to the container's working directory. Defaults to `./config/links.yaml`.
 * `STATS_ONLINE_THRESHOLD_MINUTES` (optional): Minutes since a participant's last stats report after which it is considered offline on the page. Defaults to `15`.
 * `STATS_EXPIRE_HOURS` (optional): Hours after which a participant's stats entry is no longer shown on the page at all. Defaults to `24`.
-* `SESSION_PASSWORD`: A string with at least 32 characters for encrypting session cookies. If not provided, the server will automatically generate one and store it in `/app/data/.session_password` for persistence across container restarts.
+* `NUXT_SESSION_PASSWORD`: A string with at least 32 characters for encrypting session cookies. If not provided, the server will automatically generate one and store it in `/app/data/.session_password` for persistence across container restarts.
 
 ### OpenID Connect (OIDC) Authentication
 
