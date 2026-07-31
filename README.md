@@ -12,12 +12,30 @@ table below the link list.
 ## Features
 
 - Single page listing configurable links, grouped by category
-- Links are configured via a simple YAML file that is re-read on every request (no restart needed)
 - Admin-only links, only shown to sessions with the configured admin role
 - The page is publicly visible; login is only required to unlock admin-only links
 - Authentication via OpenID Connect (OIDC) only
-- Database connector (PostgreSQL via TypeORM) that stores and serves LAN party participant stats, with an
-  online/offline status dot and "last online at" hover tooltip per participant
+- LAN party participant stats, with an online/offline status dot and "last online at" hover tooltip per participant (powered by ETI LAN Launcher)
+
+Below subsections will describe the main features in more detail.
+
+### Link Collection
+
+![Screenshot of the link collection](docs/assets/feature-links.png)
+
+All links are configured in a file named `links.yaml`. Each link has a title, URL, category and an icon or image.
+By a simple configuration change, the page can be adapted to any LAN party's needs.
+For links that are only relevant to admins, the `adminOnly` field can be set to `true`.
+Those links will only be shown to logged-in users with the configured admin role.
+
+### LAN Participants Statistics
+
+This feature is powered by the [ETI LAN Launcher](https://www.eti-lan.xyz/) client, which reports hardware and player info to the server.
+
+![Screenshot of the participants table](docs/assets/feature-participants.png)
+
+The online/offline status of each participant is determined by the last time they reported to the server.
+If a participant has not reported in the last x minutes, they are considered offline (x can be configured).
 
 ## Usage
 
