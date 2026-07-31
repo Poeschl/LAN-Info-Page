@@ -112,3 +112,15 @@ After that, you can start the server with:
 ```bash
 npm run dev
 ```
+
+### Simulating a Participant Stats Report
+
+To test the "Participants" table without a real LAN Launcher client, simulate a stats report with `curl` against the
+running dev server (`GET /api/stats/report`, unauthenticated):
+
+```bash
+curl "http://localhost:3000/api/stats/report?hostname=LAN-PC-01&macaddr1=00:1A:2B:3C:4D:5E&macaddr2=00:1A:2B:3C:4D:5F&board_manufacturer=ASUS&baseboard=ROG%20STRIX%20B550-F&system_product_name=Custom%20Build&bios_release=2.20&cpu=AMD%20Ryzen%207%205800X&gpu=NVIDIA%20RTX%203070&windows_edition=Windows%2011%20Pro&player_name=Markus&current_game=Counter-Strike%202"
+```
+
+Only `macaddr1` is required, all other query parameters are optional. A successful call returns `ok` and the
+participant then shows up at `GET /api/stats` and in the page's "Participants" table.

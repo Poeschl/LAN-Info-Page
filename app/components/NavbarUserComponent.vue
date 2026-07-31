@@ -14,13 +14,13 @@
 
 <script setup lang="ts">
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { useUserSession } from "#imports";
+import { reloadNuxtApp, useUserSession } from "#imports";
 
 const userSession = useUserSession();
 const loggedIn = computed(() => userSession.loggedIn.value);
 
 const logout = async () => {
   await userSession.clear();
-  navigateTo("/");
+  reloadNuxtApp({ path: "/" });
 };
 </script>

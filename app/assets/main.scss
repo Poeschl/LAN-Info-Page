@@ -51,6 +51,18 @@
   $card-color: utilities.$grey-lightest
 );
 
+@use "bulma/sass/elements/table" with (
+  $table-background-color: color.adjust(utilities.$black-ter, $lightness: 1%),
+  $table-color: utilities.$grey-lightest,
+  $table-cell-border-color: utilities.$grey-darker,
+  $table-cell-heading-color: utilities.$grey-lightest,
+  $table-head-cell-color: utilities.$grey-lightest,
+  $table-foot-cell-color: utilities.$grey-lightest,
+  $table-row-hover-background-color: color.adjust(utilities.$black-ter, $lightness: 10%),
+  $table-striped-row-even-background-color: color.adjust(utilities.$black-ter, $lightness: 3%),
+  $table-striped-row-even-hover-background-color: color.adjust(utilities.$black-ter, $lightness: 10%)
+);
+
 @use "bulma/sass/layout/footer" with (
   $footer-background-color: unset,
 );
@@ -107,8 +119,8 @@
 }
 
 .card-image:first-child .placeholder {
-  border-start-start-radius: var(--bulma-card-radius);
-  border-start-end-radius: var(--bulma-card-radius);
+  border-start-start-radius: var(--bulma-box-radius);
+  border-start-end-radius: var(--bulma-box-radius);
 }
 
 // Default transitions
