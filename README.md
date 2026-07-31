@@ -31,24 +31,14 @@ Those links will only be shown to logged-in users with the configured admin role
 
 ### Downloads
 
+![Screenshot of the downloads section](docs/assets/feature-download.png)
+
 Any file placed in the `config/downloads` folder is automatically listed in a "Downloads" section on the page,
-right below the link collection. There is no configuration file for this feature - just drop a file in and it
-shows up; remove it and it disappears again, no restart required. This is useful for sharing installers, mods or
-maps directly from the page instead of (or in addition to) linking to an external file share.
+right below the link collection. There is no configuration file for this feature - just drop a file in, and it
+shows up; remove it, and it disappears again, no restart required.
 
 Only installers and archives are allowed: `.exe`, `.msi`, `.zip`, `.7z`, `.rar`, `.tar`, `.tar.gz`, `.tgz`,
-`.tar.bz2` and `.gz`. Files with any other extension are silently ignored - both in the listing and when
-requested directly - to keep this feature limited to its intended purpose (shipping tools/mods to participants,
-not general-purpose file hosting).
-
-Files are served at `/api/downloads/<filename>` with a "Save As" download prompt, and are publicly accessible to
-anyone visiting the page (same as the regular link collection) - there is currently no admin-only restriction for
-downloadable files. Hidden files (names starting with a dot) and subfolders are ignored. Installers and archives
-are shown with distinct icons in the "Downloads" section so participants can tell them apart at a glance.
-
-If you need more advanced file sharing (uploads by participants, folder browsing, permissions, ...), consider
-running a dedicated file server like [copyparty](https://github.com/9001/copyparty) alongside this page and adding
-a regular link to it instead.
+`.tar.bz2` and `.gz`. Files with any other extension are silently ignored.
 
 ### LAN Participants Statistics
 
