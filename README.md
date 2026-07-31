@@ -1,6 +1,6 @@
-# LAN-Page
+# LAN Info Page
 
-LAN-Page provides an easy way to share important links (game servers, wiki, voice chat, tournament brackets, ...)
+LAN Info Page provides an easy way to share important links (game servers, wiki, voice chat, tournament brackets, ...)
 with LAN party participants. Admins can additionally see admin-only links (e.g. infrastructure dashboards) when
 logged in with the right role. The page itself is always publicly visible, no login is required to see the
 regular links.
@@ -23,7 +23,7 @@ table below the link list.
 
 The server can be deployed as a pre-built podman/docker container.
 
-An overview of how to set up LAN-Page is described in the [deploy](deploy) directory. Please look there for more
+An overview of how to set up LAN Info Page is described in the [deploy](deploy) directory. Please look there for more
 information.
 
 ## Development

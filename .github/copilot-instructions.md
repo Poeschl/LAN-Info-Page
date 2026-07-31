@@ -1,8 +1,8 @@
-# GitHub Copilot Instructions for LAN-Page
+# GitHub Copilot Instructions for LAN Info Page
 
 ## Repository Overview
 
-**LAN-Page** is a Nuxt 4-based web application that shows a single, publicly visible page listing configurable
+**LAN Info Page** is a Nuxt 4-based web application that shows a single, publicly visible page listing configurable
 links (game servers, wiki, voice chat, etc.) for LAN party participants. Links are configured via a YAML file and
 re-read on every request. Users authenticated via OIDC whose token/session contains the admin role additionally see
 admin-only links. The project also ships a database connector, used to collect and display LAN party participant

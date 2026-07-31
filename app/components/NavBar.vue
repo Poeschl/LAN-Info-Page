@@ -4,7 +4,7 @@
       <div class="navbar-brand">
         <a href="/" class="navbar-item">
           <img class="mr-2" src="/img/icon_white.png">
-          <span class="is-size-5">LAN-Page</span>
+          <span class="is-size-5">LAN Info</span>
         </a>
         <a role="button" class="navbar-burger" data-target="menuItems" :class="{ 'is-active': mobileNavOpen }" @click="toggleMobileNav">
           <span aria-hidden="true"/>

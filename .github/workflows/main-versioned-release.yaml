@@ -141,7 +141,7 @@ jobs:
         id: docker-meta
         uses: docker/metadata-action@v6
         with:
-          images: ghcr.io/lan-page/lan-page
+          images: ghcr.io/poeschl/lan-page
           tags: type=ref,event=tag
 
       - name: 🏗️ Install qemu dependency

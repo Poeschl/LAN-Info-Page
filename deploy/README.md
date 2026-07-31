@@ -1,6 +1,6 @@
-# How to deploy LAN-Page
+# How to deploy LAN Info Page
 
-LAN-Page can be deployed using a pre-built Podman/Docker container using the provided `docker-compose.yaml`.
+LAN Info Page can be deployed using a pre-built Podman/Docker container using the provided `docker-compose.yaml`.
 
 Before starting the server, ensure that you adjusted the environment variables and the `links.yaml` config to your needs.
 Authentication is only possible via OIDC. Without it configured, the page is still shown, but no admin links will

@@ -1,7 +1,7 @@
 <template>
   <footer class="footer is-flex is-justify-content-center">
     <div class="is-flex is-justify-content-center pt-1 footer-divider">
-      <a class="button is-text" href="https://github.com/GameDropOrg" target="_blank" title="Source">
+      <a class="button is-text" href="https://github.com/Poeschl/LAN-Info-Page" target="_blank" title="Source">
         <div class="icon">
           <FontAwesomeIcon icon="fa-brands fa-github" class="fa-xl"/>
         </div>

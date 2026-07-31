@@ -69,9 +69,9 @@ useHead({
   ],
 });
 
-const title = "LAN-Page";
+const title = "LAN Info";
 const description =
-  "LAN-Page provides an easy way to share important links with LAN party participants and admins.";
+  "LAN Info provides an easy way to share important links with LAN party participants and admins.";
 useSeoMeta({
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   title: title,

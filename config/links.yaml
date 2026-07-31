@@ -1,4 +1,4 @@
-# Configuration for the links shown on the LAN-Page start page.
+# Configuration for the links shown on the LAN Info start page.
 #
 # Each entry supports the following fields:
 #   title        - required, display name of the link
