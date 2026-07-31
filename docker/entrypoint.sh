@@ -40,6 +40,7 @@ elif [ -f "$SESSION_PASSWORD_FILE" ]; then
   export NUXT_SESSION_PASSWORD=$(cat "$SESSION_PASSWORD_FILE")
 else
   echo "Generating new session password..."
+  mkdir -p "$(dirname "$SESSION_PASSWORD_FILE")"
   NUXT_SESSION_PASSWORD=$(cat /dev/urandom | tr -dc 'a-f0-9' | head -c 64)
   echo "$NUXT_SESSION_PASSWORD" > "$SESSION_PASSWORD_FILE"
   chmod 600 "$SESSION_PASSWORD_FILE"
