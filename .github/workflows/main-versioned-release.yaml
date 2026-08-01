@@ -160,7 +160,7 @@ jobs:
           layers: false
 
       - name: 🔑 GHCR Login
-        uses: redhat-actions/podman-login@v3
+        uses: redhat-actions/podman-login@v2
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
