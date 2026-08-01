@@ -1,8 +1,11 @@
 <template>
   <div v-if="files.length > 0" class="mb-5">
     <h2 class="title is-4">
-Downloads
-</h2>
+      <span class="icon-text">
+        <span class="icon"><FontAwesomeIcon icon="fa-solid fa-download"/></span>
+        <span>Downloads</span>
+      </span>
+    </h2>
     <div class="columns is-multiline">
       <div
           v-for="file in files"

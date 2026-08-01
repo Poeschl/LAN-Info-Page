@@ -5,13 +5,13 @@
     </div>
 
     <div v-else>
-      <div class="section px-0">
+      <div id="links" class="section px-0">
         <LinkCollection :links="links"/>
       </div>
-      <div class="section px-0" v-if="downloads.length > 0" >
+      <div id="downloads" class="section px-0" v-if="downloads.length > 0" >
         <DownloadsList :files="downloads"/>
       </div>
-      <div class="section px-0" v-if="stats.length > 0" >
+      <div id="participants" class="section px-0" v-if="stats.length > 0" >
         <ParticipantsTable :stats="stats"/>
       </div>
     </div>
@@ -19,10 +19,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, watchEffect } from "vue";
 import { useLinksApi } from "~/composeables/useLinksApi";
 import { useDownloadsApi } from "~/composeables/useDownloadsApi";
 import { useStatsApi } from "~/composeables/useStatsApi";
+import { usePageToc } from "~/composeables/usePageToc";
 import LoadingAnimation from "~/components/LoadingAnimation.vue";
 import DownloadsList from "~/components/DownloadsList.vue";
 import type { Link } from "#shared/models/Link";
@@ -50,4 +51,17 @@ const downloads = computed<DownloadFile[]>(
   () => downloadsData.value?.files ?? [],
 );
 const stats = computed<PlayerStat[]>(() => statsData.value?.stats ?? []);
+const onlineCount = computed<number>(
+  () => stats.value.filter((stat) => stat.online).length,
+);
+
+const pageToc = usePageToc();
+watchEffect(() => {
+  pageToc.value = {
+    hasDownloads: downloads.value.length > 0,
+    hasParticipants: stats.value.length > 0,
+    onlineCount: onlineCount.value,
+    totalCount: stats.value.length,
+  };
+});
 </script>

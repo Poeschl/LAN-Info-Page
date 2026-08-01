@@ -30,6 +30,7 @@ export async function ensureDataSourceInitialized(): Promise<void> {
         LOGGER.info("Data Source has been initialized!");
       })
       .catch((error) => {
+        initPromise = null;
         LOGGER.error("Failed to initialize Data Source:");
         LOGGER.error(
           `Host: ${applicationEnv.databaseHost}:${applicationEnv.databasePort}`,

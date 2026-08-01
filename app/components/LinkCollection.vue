@@ -1,6 +1,9 @@
 <template>
   <h2 class="title is-4">
-    Link Collection
+    <span class="icon-text">
+      <span class="icon"><FontAwesomeIcon icon="fa-solid fa-link"/></span>
+      <span>Links</span>
+    </span>
   </h2>
   <div>
     <div v-if="links.length === 0" class="has-text-centered py-6">
@@ -17,7 +20,13 @@
             :key="link.id"
             class="column is-one-third-desktop is-half-tablet"
         >
-          <a :href="link.url" target="_blank" rel="noopener noreferrer" class="box link-card">
+          <a
+              :href="link.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="box link-card"
+              :class="{ 'link-card-admin': link.adminOnly }"
+          >
             <div class="is-flex is-align-items-center">
               <img
                   v-if="link.imageUrl"
@@ -80,10 +89,15 @@ const linksByCategory = computed<Record<string, Link[]>>(() => {
 .link-card {
   display: block;
   height: 100%;
+  border: 1px solid transparent;
   transition: transform 0.1s ease-in-out;
 
   &:hover {
     transform: translateY(-2px);
+  }
+
+  &-admin {
+    border-color: var(--bulma-info);
   }
 }
 
