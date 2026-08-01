@@ -4,6 +4,15 @@ import { resolve } from "path";
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
+  build: {
+    transpile: [
+      "@fortawesome/vue-fontawesome",
+      "@fortawesome/fontawesome-svg-core",
+      "@fortawesome/free-solid-svg-icons",
+      "@fortawesome/free-regular-svg-icons",
+      "@fortawesome/free-brands-svg-icons",
+    ],
+  },
   css: ["~/assets/main.scss", "@fortawesome/fontawesome-svg-core/styles.css"],
   devtools: {
     enabled: process.env.NODE_ENV !== "production",
