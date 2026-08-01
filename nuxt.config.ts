@@ -25,6 +25,9 @@ export default defineNuxtConfig({
   nitro: {
     moduleSideEffects: ["reflect-metadata"],
     rollupConfig: {
+      treeshake: {
+        propertyReadSideEffects: "always",
+      },
       output: {
         manualChunks: (id) => {
           if (id.includes("Env.ts")) {
