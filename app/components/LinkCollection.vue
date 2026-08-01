@@ -28,9 +28,9 @@
               <span class="icon is-medium mr-3" v-else-if="link.icon">
                 <FontAwesomeIcon :icon="link.icon" class="fa-xl"/>
               </span>
-              <div>
+              <div class="link-text">
                 <div class="is-flex is-align-items-center">
-                  <span class="has-text-weight-semibold">{{ link.title }}</span>
+                  <span class="has-text-weight-semibold title-ellipsis" :title="link.title">{{ link.title }}</span>
                   <span v-if="link.adminOnly" class="tag is-warning is-light ml-2">Admin</span>
                 </div>
                 <p v-if="link.description" class="is-size-7 has-text-grey description-ellipsis" :title="link.description">
@@ -69,6 +69,9 @@ const linksByCategory = computed<Record<string, Link[]>>(() => {
     grouped[category] ??= [];
     grouped[category].push(link);
   }
+  for (const category of Object.keys(grouped)) {
+    grouped[category].sort((a, b) => a.title.localeCompare(b.title));
+  }
   return grouped;
 });
 </script>
@@ -82,6 +85,19 @@ const linksByCategory = computed<Record<string, Link[]>>(() => {
   &:hover {
     transform: translateY(-2px);
   }
+}
+
+.link-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.title-ellipsis {
+  display: block;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .description-ellipsis {
