@@ -77,10 +77,10 @@ describe("DownloadsList", () => {
     });
     const icons = component.findAllComponents({ name: "FontAwesomeIcon" });
 
-    // then
-    expect(icons).toHaveLength(3);
-    expect(icons[0].props("icon")).toBe("fa-solid fa-file-zipper");
-    expect(icons[1].props("icon")).toBe("fa-solid fa-gear");
-    expect(icons[2].props("icon")).toBe("fa-solid fa-file");
+    // then (index 0 is the header download icon)
+    expect(icons).toHaveLength(4);
+    expect(icons[1].props("icon")).toBe("fa-solid fa-file-zipper");
+    expect(icons[2].props("icon")).toBe("fa-solid fa-gear");
+    expect(icons[3].props("icon")).toBe("fa-solid fa-file");
   });
 });
