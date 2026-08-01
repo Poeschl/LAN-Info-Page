@@ -1,8 +1,11 @@
 <template>
   <div class="mb-5">
     <h2 class="title is-4">
-Participants Stats
-</h2>
+      <span class="icon-text">
+        <span class="icon"><FontAwesomeIcon icon="fa-solid fa-users"/></span>
+        <span>Participants Stats</span>
+      </span>
+    </h2>
     <div class="table-container">
       <table class="table is-fullwidth is-striped is-hoverable is-rounded">
         <thead>
@@ -43,6 +46,7 @@ Participants Stats
 </template>
 
 <script setup lang="ts">
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import type { PlayerStat } from "#shared/models/PlayerStat";
 
 defineProps<{

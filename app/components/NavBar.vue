@@ -6,6 +6,18 @@
           <img class="mr-2" src="/img/icon_white.png">
           <span class="is-size-5">LAN Info</span>
         </a>
+        <a href="#links" class="navbar-item">
+          <span class="icon"><FontAwesomeIcon icon="fa-solid fa-link"/></span>
+          <span>Links</span>
+        </a>
+        <a href="#downloads" class="navbar-item" v-if="pageToc.hasDownloads">
+          <span class="icon"><FontAwesomeIcon icon="fa-solid fa-download"/></span>
+          <span>Downloads</span>
+        </a>
+        <a href="#participants" class="navbar-item" v-if="pageToc.hasParticipants">
+          <span class="icon"><FontAwesomeIcon icon="fa-solid fa-users"/></span>
+          <span>Participants Stats</span>
+        </a>
         <a role="button" class="navbar-burger" data-target="menuItems" :class="{ 'is-active': mobileNavOpen }" @click="toggleMobileNav">
           <span aria-hidden="true"/>
           <span aria-hidden="true"/>
@@ -43,11 +55,13 @@ import { ref } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useUserSession } from "#imports";
 import { useAuthApi } from "~/composeables/useAuthApi";
+import { usePageToc } from "~/composeables/usePageToc";
 import { AuthMethod } from "#shared/models/Auth";
 
 const mobileNavOpen = ref<boolean>(false);
 const loggedIn = computed(() => useUserSession().loggedIn.value);
 const authApi = useAuthApi();
+const pageToc = usePageToc();
 const { data: loginInfo } = await useAsyncData(
   "auth-info",
   authApi.getLoginInfo,

@@ -1,6 +1,9 @@
 <template>
   <h2 class="title is-4">
-    Link Collection
+    <span class="icon-text">
+      <span class="icon"><FontAwesomeIcon icon="fa-solid fa-link"/></span>
+      <span>Links</span>
+    </span>
   </h2>
   <div>
     <div v-if="links.length === 0" class="has-text-centered py-6">
