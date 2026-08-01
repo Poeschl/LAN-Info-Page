@@ -43,9 +43,11 @@ colored dot indicating online/offline status.
 * `DATABASE_PASSWORD`: The password for the PostgreSQL database.
 * `DATABASE_NAME`: The name of the PostgreSQL database.
 * `LINKS_CONFIG_PATH` (optional): Path to the links YAML file, relative to the container's working directory. Defaults to `./config/links.yaml`.
+* `DOWNLOADS_PATH` (optional): Path to the downloads folder, relative to the container's working directory. Defaults to `./config/downloads`.
 * `STATS_ONLINE_THRESHOLD_MINUTES` (optional): Minutes since a participant's last stats report after which it is considered offline on the page. Defaults to `15`.
 * `STATS_EXPIRE_HOURS` (optional): Hours after which a participant's stats entry is no longer shown on the page at all. Defaults to `24`.
-* `NUXT_SESSION_PASSWORD`: A string with at least 32 characters for encrypting session cookies. If not provided, the server will automatically generate one and store it in `/app/data/.session_password` for persistence across container restarts.
+* `LOG_LEVEL` (optional): Log level for the server. Defaults to `info`. Valid values: `debug`, `info`, `warn`, `error`.
+* `SESSION_PASSWORD`: A string with at least 32 characters for encrypting session cookies. If not provided, the server will automatically generate one and store it in `/app/data/.session_password` for persistence across container restarts.
 
 ### OpenID Connect (OIDC) Authentication
 
@@ -55,9 +57,9 @@ intermediate login page). Unlike the admin-only login of the previous project, *
 log in here since the page itself is public. Only users whose token contains the admin role additionally see the
 admin-only links.
 
-* `NUXT_OAUTH_OIDC_DISCOVERY_URL` (optional): The OpenID Connect discovery URL for OIDC authentication. (for example for keycloak, `https://login.example.com/realms/myrealm/.well-known/openid-configuration`)
-* `NUXT_OAUTH_OIDC_CLIENT_ID` (optional): The OpenID Connect client ID.
-* `NUXT_OAUTH_OIDC_CLIENT_SECRET` (optional): The OpenID Connect client secret.
+* `OIDC_DISCOVERY_URL` (optional): The OpenID Connect discovery URL for OIDC authentication. (for example for keycloak, `https://login.example.com/realms/myrealm/.well-known/openid-configuration`)
+* `OIDC_CLIENT_ID` (optional): The OpenID Connect client ID.
+* `OIDC_CLIENT_SECRET` (optional): The OpenID Connect client secret.
 
 As redirect URI use `https://<your-domain>/auth/oidc` and a user needs to have the scope `openid` and `email` to log in.
 

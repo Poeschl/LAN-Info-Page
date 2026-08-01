@@ -12,6 +12,8 @@ DATABASE_NAME="${DATABASE_NAME:-postgres}"
 LINKS_CONFIG_PATH="${LINKS_CONFIG_PATH:-./config/links.yaml}"
 STATS_ONLINE_THRESHOLD_MINUTES="${STATS_ONLINE_THRESHOLD_MINUTES:-15}"
 STATS_EXPIRE_HOURS="${STATS_EXPIRE_HOURS:-24}"
+DOWNLOADS_PATH="${DOWNLOADS_PATH:-./config/downloads}"
+LOG_LEVEL="${LOG_LEVEL:-info}"
 OIDC_DISCOVERY_URL="${OIDC_DISCOVERY_URL:-}"
 OIDC_CLIENT_ID="${OIDC_CLIENT_ID:-}"
 OIDC_CLIENT_SECRET="${OIDC_CLIENT_SECRET:-}"
@@ -23,8 +25,10 @@ sed -i \
   -e "s|\"databasePassword\": \"[^\"]*\"|\"databasePassword\": \"$DATABASE_PASSWORD\"|" \
   -e "s|\"databaseName\": \"[^\"]*\"|\"databaseName\": \"$DATABASE_NAME\"|" \
   -e "s|\"linksConfigPath\": \"[^\"]*\"|\"linksConfigPath\": \"$LINKS_CONFIG_PATH\"|" \
+  -e "s|\"downloadsPath\": \"[^\"]*\"|\"downloadsPath\": \"$DOWNLOADS_PATH\"|" \
   -e "s|\"statsOnlineThresholdMinutes\": [0-9]*|\"statsOnlineThresholdMinutes\": $STATS_ONLINE_THRESHOLD_MINUTES|" \
   -e "s|\"statsExpireHours\": [0-9]*|\"statsExpireHours\": $STATS_EXPIRE_HOURS|" \
+  -e "s|\"logLevel\": \"[^\"]*\"|\"logLevel\": \"$LOG_LEVEL\"|" \
   -e "s|\"oidcOpenidAutoDiscoveryUrl\": \"[^\"]*\"|\"oidcOpenidAutoDiscoveryUrl\": \"$OIDC_DISCOVERY_URL\"|" \
   -e "s|\"oidcClientId\": \"[^\"]*\"|\"oidcClientId\": \"$OIDC_CLIENT_ID\"|" \
   -e "s|\"oidcClientSecret\": \"[^\"]*\"|\"oidcClientSecret\": \"$OIDC_CLIENT_SECRET\"|" \

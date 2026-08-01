@@ -13,7 +13,7 @@ services:
       DATABASE_NAME: postgres
 
       # Required: session encryption key (must be with at least 32 characters)
-      NUXT_SESSION_PASSWORD: "changeme-replace-with-a-secure-random-string-32chars"
+      SESSION_PASSWORD: "changeme-replace-with-a-secure-random-string-32chars"
 
       # Enable OIDC authentication by setting those variables (required, no other login method exists)
       OIDC_DISCOVERY_URL: "https://your-idp.example.com/.well-known/openid-configuration"
