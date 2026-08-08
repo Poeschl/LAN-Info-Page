@@ -60,6 +60,11 @@ admin-only links.
 * `OIDC_DISCOVERY_URL` (optional): The OpenID Connect discovery URL for OIDC authentication. (for example for keycloak, `https://login.example.com/realms/myrealm/.well-known/openid-configuration`)
 * `OIDC_CLIENT_ID` (optional): The OpenID Connect client ID.
 * `OIDC_CLIENT_SECRET` (optional): The OpenID Connect client secret.
+* `OIDC_ALLOW_INSECURE_COOKIES` (optional): Set to `true` only if the app is served over **plain HTTP** (no TLS,
+  e.g. a reverse proxy without HTTPS). The OIDC login flow's cookies are always marked `Secure` in production,
+  which browsers refuse to send back over HTTP, causing login to fail with a "state mismatch" error. Enabling
+  this strips the `Secure` attribute from those cookies again. **Prefer enabling HTTPS on your reverse proxy
+  instead of using this setting**, since it weakens cookie security. Defaults to `false`.
 
 As redirect URI use `https://<your-domain>/auth/oidc` and a user needs to have the scope `openid` and `email` to log in.
 

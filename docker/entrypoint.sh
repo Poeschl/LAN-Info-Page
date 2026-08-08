@@ -17,6 +17,7 @@ LOG_LEVEL="${LOG_LEVEL:-info}"
 OIDC_DISCOVERY_URL="${OIDC_DISCOVERY_URL:-}"
 OIDC_CLIENT_ID="${OIDC_CLIENT_ID:-}"
 OIDC_CLIENT_SECRET="${OIDC_CLIENT_SECRET:-}"
+OIDC_ALLOW_INSECURE_COOKIES="${OIDC_ALLOW_INSECURE_COOKIES:-false}"
 
 sed -i \
   -e "s|\"databaseHost\": \"[^\"]*\"|\"databaseHost\": \"$DATABASE_HOST\"|" \
@@ -32,6 +33,7 @@ sed -i \
   -e "s|\"oidcOpenidAutoDiscoveryUrl\": \"[^\"]*\"|\"oidcOpenidAutoDiscoveryUrl\": \"$OIDC_DISCOVERY_URL\"|" \
   -e "s|\"oidcClientId\": \"[^\"]*\"|\"oidcClientId\": \"$OIDC_CLIENT_ID\"|" \
   -e "s|\"oidcClientSecret\": \"[^\"]*\"|\"oidcClientSecret\": \"$OIDC_CLIENT_SECRET\"|" \
+  -e "s|\"oidcAllowInsecureCookies\": \(true\|false\)|\"oidcAllowInsecureCookies\": $OIDC_ALLOW_INSECURE_COOKIES|" \
   $ENV_FILE
 
 SESSION_PASSWORD_FILE="/app/data/.session_password"
