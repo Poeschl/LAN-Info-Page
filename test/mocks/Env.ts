@@ -19,4 +19,5 @@ export const applicationEnv = {
   oidcOpenidAutoDiscoveryUrl: "",
   oidcClientId: "",
   oidcClientSecret: "",
+  oidcAllowInsecureCookies: false,
 };
