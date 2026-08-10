@@ -17,7 +17,6 @@ LOG_LEVEL="${LOG_LEVEL:-info}"
 OIDC_DISCOVERY_URL="${OIDC_DISCOVERY_URL:-}"
 OIDC_CLIENT_ID="${OIDC_CLIENT_ID:-}"
 OIDC_CLIENT_SECRET="${OIDC_CLIENT_SECRET:-}"
-OIDC_ALLOW_INSECURE_COOKIES="${OIDC_ALLOW_INSECURE_COOKIES:-false}"
 
 sed -i \
   -e "s|\"databaseHost\": \"[^\"]*\"|\"databaseHost\": \"$DATABASE_HOST\"|" \
@@ -33,8 +32,15 @@ sed -i \
   -e "s|\"oidcOpenidAutoDiscoveryUrl\": \"[^\"]*\"|\"oidcOpenidAutoDiscoveryUrl\": \"$OIDC_DISCOVERY_URL\"|" \
   -e "s|\"oidcClientId\": \"[^\"]*\"|\"oidcClientId\": \"$OIDC_CLIENT_ID\"|" \
   -e "s|\"oidcClientSecret\": \"[^\"]*\"|\"oidcClientSecret\": \"$OIDC_CLIENT_SECRET\"|" \
-  -e "s|\"oidcAllowInsecureCookies\": \(true\|false\)|\"oidcAllowInsecureCookies\": $OIDC_ALLOW_INSECURE_COOKIES|" \
   $ENV_FILE
+
+# oidcAllowInsecureCookies is read via Nuxt's runtimeConfig, to avoid optimization errors from rollup
+OIDC_ALLOW_INSECURE_COOKIES="${OIDC_ALLOW_INSECURE_COOKIES:-false}"
+OIDC_ALLOW_INSECURE_COOKIES=$(echo "$OIDC_ALLOW_INSECURE_COOKIES" | tr '[:upper:]' '[:lower:]')
+if [ "$OIDC_ALLOW_INSECURE_COOKIES" != "true" ]; then
+  OIDC_ALLOW_INSECURE_COOKIES="false"
+fi
+export NUXT_OIDC_ALLOW_INSECURE_COOKIES="$OIDC_ALLOW_INSECURE_COOKIES"
 
 SESSION_PASSWORD_FILE="/app/data/.session_password"
 
