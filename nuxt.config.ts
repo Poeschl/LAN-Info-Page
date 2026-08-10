@@ -44,6 +44,7 @@ export default defineNuxtConfig({
         secure: false,
       },
     },
+    oidcAllowInsecureCookies: false,
     public: {
       appVersion: JSON.parse(
         readFileSync(resolve(process.cwd(), "package.json"), "utf-8"),
