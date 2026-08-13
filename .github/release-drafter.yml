@@ -8,46 +8,52 @@ sort-direction: ascending
 
 categories:
   - title: "🚨 Breaking changes"
-    labels:
-      - "breaking-change"
+    semver-increment: "major"
+    when:
+      labels:
+        - "breaking-change"
   - title: "✨ New features"
-    labels:
-      - "new-feature"
+    semver-increment: "minor"
+    when:
+      labels:
+       - "new-feature"
   - title: "🐛 Bug fixes"
-    labels:
-      - "bugfix"
+    semver-increment: "patch"
+    when:
+      labels:
+        - "bugfix"
   - title: "🚀 Enhancements"
-    labels:
-      - "enhancement"
-      - "refactor"
+    semver-increment: "patch"
+    when:
+      labels:
+        - "enhancement"
+        - "refactor"
   - title: "🔨 Maintenance"
-    labels:
-      - "maintenance"
+    semver-increment: "patch"
+    when:
+      labels:
+        - "maintenance"
   - title: "📚 Documentation"
-    labels:
-      - "documentation"
+    semver-increment: "patch"
+    when:
+      labels:
+        - "documentation"
   - title: "⬆️ Dependency updates"
-    labels:
+    semver-increment: "patch"
+    when:
+      labels:
       - "dependencies"
-
-version-resolver:
-  major:
-    labels:
-      - "major-release"
-      - "breaking-change"
-  minor:
-    labels:
-      - "minor-release"
-      - "new-feature"
-  patch:
-    labels:
-      - "bugfix"
-      - "dependencies"
-      - "documentation"
-      - "enhancement"
-      - "refactor"
-      - "maintenance"
-  default: patch
+  # Labels that only affect version resolution, without their own changelog section
+  - type: "version-resolver"
+    semver-increment: "major"
+    when:
+      label: "major-release"
+  - type: "version-resolver"
+    semver-increment: "minor"
+    when:
+      label: "minor-release"
+  - type: "version-resolver"
+    semver-increment: "patch"
 
 template: |
   ## Changes in this version
