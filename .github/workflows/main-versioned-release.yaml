@@ -4,6 +4,11 @@ on:
     types:
       - published
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Never cancel an in-progress release run, since it pushes version commits/tags to main
+  cancel-in-progress: false
+
 jobs:
 
   tests:
